@@ -3,6 +3,14 @@
 > グラスモーフィズム調のUIで遊べる、ブラウザ完結型のビデオポーカー（Jacks or Better）ゲーム。
 > インストール不要・依存ライブラリなし。`index.html` を開くだけで動きます。
 
+## 🎮 ▶ 今すぐ遊ぶ（ライブデモ）
+
+### **https://sawahotaru.github.io/premium-poker/**
+
+インストール不要・登録不要。上記URLを開くだけでブラウザでそのままプレイできます。
+
+[![Play Now](https://img.shields.io/badge/▶_Play_Now-GitHub_Pages-d4af37?style=for-the-badge)](https://sawahotaru.github.io/premium-poker/)
+
 ![Premium Poker スクリーンショット](assets/screenshot.png)
 
 ---
@@ -43,10 +51,13 @@ python -m http.server 8000
 
 ブラウザで `http://localhost:8000` を開く。
 
-### 方法3: GitHub Pages で公開
+### 方法3: GitHub Pages（公開済み）
 
-リポジトリの **Settings → Pages** で公開ブランチを指定するだけで、
-`https://sawahotaru.github.io/premium-poker/` から誰でも遊べるようになります。
+このリポジトリは GitHub Pages で**すでに公開済み**です。下記URLからすぐに遊べます：
+
+**https://sawahotaru.github.io/premium-poker/**
+
+（フォークして自分で公開する場合は、リポジトリの **Settings → Pages → Source: `main` / `/root`** を指定するだけでOKです）
 
 ---
 
