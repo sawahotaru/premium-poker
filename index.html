@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Poker Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Premium Poker</h1>
+            <div id="stats">
+                <div class="stat-item">Credits: <span id="credits">1000</span></div>
+                <div class="stat-item bet-control">
+                    Bet:
+                    <button id="bet-minus" onclick="changeBet(-10)" aria-label="Decrease bet">−</button>
+                    <span id="bet">10</span>
+                    <button id="bet-plus" onclick="changeBet(10)" aria-label="Increase bet">+</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="message-area" class="hidden">Game Started!</div>
+            <div id="cards-container">
+                <div class="card" id="card-0" onclick="toggleHold(0)">
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"></div>
+                    </div>
+                </div>
+                <div class="card" id="card-1" onclick="toggleHold(1)">
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"></div>
+                    </div>
+                </div>
+                <div class="card" id="card-2" onclick="toggleHold(2)">
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"></div>
+                    </div>
+                </div>
+                <div class="card" id="card-3" onclick="toggleHold(3)">
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"></div>
+                    </div>
+                </div>
+                <div class="card" id="card-4" onclick="toggleHold(4)">
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="controls">
+                <button id="deal-btn" onclick="handleAction()">DEAL</button>
+            </div>
+        </main>
+
+        <div id="payout-table">
+            <div class="payout-row" data-hand="ROYAL"><span>Royal Flush</span><span>x250</span></div>
+            <div class="payout-row" data-hand="STRAIGHT_FLUSH"><span>Straight Flush</span><span>x50</span></div>
+            <div class="payout-row" data-hand="FOUR"><span>Four of a Kind</span><span>x25</span></div>
+            <div class="payout-row" data-hand="FULL_HOUSE"><span>Full House</span><span>x9</span></div>
+            <div class="payout-row" data-hand="FLUSH"><span>Flush</span><span>x6</span></div>
+            <div class="payout-row" data-hand="STRAIGHT"><span>Straight</span><span>x4</span></div>
+            <div class="payout-row" data-hand="THREE"><span>Three of a Kind</span><span>x3</span></div>
+            <div class="payout-row" data-hand="TWO_PAIR"><span>Two Pair</span><span>x2</span></div>
+            <div class="payout-row" data-hand="JACKS"><span>Jacks or Better</span><span>x1</span></div>
+        </div>
+
+        <div id="game-over" class="hidden">
+            <div class="game-over-box">
+                <h2>GAME OVER</h2>
+                <p>You ran out of credits.</p>
+                <button id="restart-btn" onclick="restartGame()">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <audio id="bg-music" loop>
+            <source src="assets/bgm.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="music-control" onclick="toggleMusic()">
+            <span id="music-icon">🔇</span>
+        </div>
+
+        <!-- BGM: "Closer To Jazz" by Jason Shaw (audionautix.com), licensed under CC BY 4.0 -->
+        <div id="music-credit">♪ "Closer To Jazz" — Jason Shaw (audionautix.com) · CC BY 4.0</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
