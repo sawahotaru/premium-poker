@@ -17,12 +17,13 @@ body {
     font-family: 'Outfit', sans-serif;
     background: url('assets/bg.png') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #game-container {
@@ -123,18 +124,22 @@ h1 {
 }
 
 #cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.4rem, 2.2vw, 1.5rem);
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
     perspective: 1000px;
 }
 
 .card {
-    width: 120px;
-    height: 180px;
+    width: 100%;
+    aspect-ratio: 2 / 3;
     cursor: pointer;
     position: relative;
     transition: transform 0.3s;
+    container-type: inline-size;
 }
 
 .card.held {
@@ -177,7 +182,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 30cqw;
     font-weight: 700;
 }
 
@@ -185,6 +190,9 @@ h1 {
     background-color: white;
     color: black;
     transform: rotateY(180deg);
+    flex-direction: column;
+    line-height: 1;
+    gap: 0.05em;
 }
 
 .card-back {
@@ -338,4 +346,109 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* ---------- Responsive: tablets & large phones ---------- */
+@media (max-width: 768px) {
+    body {
+        align-items: stretch;
+    }
+
+    #game-container {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        border: none;
+        border-radius: 0;
+        padding: 1.25rem 1rem 4rem;
+        gap: 1.25rem;
+        justify-content: flex-start;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    #stats {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .stat-item {
+        font-size: 1rem;
+    }
+
+    #message-area {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    #deal-btn {
+        padding: 0.9rem 3rem;
+        font-size: 1.3rem;
+    }
+
+    #payout-table {
+        gap: 0.4rem 1rem;
+        font-size: 0.75rem;
+        padding: 0.85rem;
+    }
+}
+
+/* ---------- Responsive: small phones ---------- */
+@media (max-width: 480px) {
+    #game-container {
+        padding: 1rem 0.75rem 4rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .card.held {
+        transform: translateY(-12px);
+    }
+
+    .card.held::after {
+        top: -22px;
+        font-size: 0.65rem;
+        padding: 1px 5px;
+    }
+
+    #payout-table {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3rem 1rem;
+        font-size: 0.72rem;
+    }
+
+    #deal-btn {
+        padding: 0.85rem 2.5rem;
+        font-size: 1.2rem;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    #music-credit {
+        font-size: 0.55rem;
+        left: 10px;
+        bottom: 6px;
+        max-width: 60%;
+    }
+
+    #music-control {
+        bottom: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+    }
 }
