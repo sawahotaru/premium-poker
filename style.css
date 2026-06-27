@@ -114,6 +114,14 @@ h1 {
     cursor: not-allowed;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
 #message-area {
     text-align: center;
     font-size: 1.5rem;
@@ -386,6 +394,10 @@ h1 {
 
     .stat-item {
         font-size: 1rem;
+    }
+
+    main {
+        gap: 1.75rem;
     }
 
     #message-area {
