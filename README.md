@@ -11,6 +11,8 @@
 
 [![Play Now](https://img.shields.io/badge/▶_Play_Now-GitHub_Pages-d4af37?style=for-the-badge)](https://sawahotaru.github.io/premium-poker/)
 
+> ミラー: <https://lab.4510.be/poker/> でも同じものを公開しています（作者の実験ハブ）。
+
 ![Premium Poker スクリーンショット](assets/screenshot.png)
 
 ---
