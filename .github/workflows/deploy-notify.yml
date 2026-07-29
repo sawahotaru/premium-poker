@@ -23,7 +23,7 @@ jobs:
     name: syntax + assets
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # ビルド段が無い素の静的サイトなので、JS の構文エラーは誰にも止められず本番に出る。
       # ブラウザが黙って死ぬだけで 404 にもならないため、ここで弾くのが唯一の門番。
