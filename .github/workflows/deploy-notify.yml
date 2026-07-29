@@ -1,6 +1,7 @@
 name: Deploy to lab.4510.be
 
-# このリポジトリの main が更新されたら、統合ハブ oracle-lab のデプロイを起動する。
+# このリポジトリの main が更新されたら、まず検査を通し、**通ったときだけ**
+# 統合ハブ oracle-lab のデプロイを起動する。
 # oracle-lab 側 (deploy-oracle.yml) が repository_dispatch: poker-updated を受け、
 # poker の静的ファイルを VM へ rsync（Caddy が /poker/ で直接配信）する。
 # poker は compose サービスではないため、VMでのコンテナビルドは発生しない（超低負荷）。
@@ -13,10 +14,49 @@ name: Deploy to lab.4510.be
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
+  check:
+    name: syntax + assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ビルド段が無い素の静的サイトなので、JS の構文エラーは誰にも止められず本番に出る。
+      # ブラウザが黙って死ぬだけで 404 にもならないため、ここで弾くのが唯一の門番。
+      - name: Check JavaScript syntax
+        run: |
+          for f in $(find . -name '*.js' -not -path './.git/*'); do
+            node --check "$f" || { echo "::error file=$f::JavaScript syntax error"; exit 1; }
+            echo "ok: $f"
+          done
+
+      # index.html が参照しているローカルのファイルが実在するか（相対パスのtypo・
+      # リネーム漏れ・アセットの入れ忘れを拾う）。外部URL(http/https)とdata:は対象外。
+      - name: Check referenced local files exist
+        run: |
+          fail=0
+          refs=$(grep -oE '(src|href)="[^"]+"' index.html | sed -E 's/^(src|href)="//; s/"$//')
+          for r in $refs; do
+            case "$r" in
+              http*|//*|data:*|'#'*|"") continue ;;
+            esac
+            if [ ! -f "$r" ]; then
+              echo "::error file=index.html::referenced file not found: $r"; fail=1
+            else
+              echo "ok: $r"
+            fi
+          done
+          [ "$fail" -eq 0 ] || exit 1
+
   notify:
+    name: Trigger oracle-lab deploy
+    needs: check
+    # 検査が通った main への push のときだけデプロイする（PR では走らせない）
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger oracle-lab deploy (scoped to poker)
