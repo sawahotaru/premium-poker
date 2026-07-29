@@ -1,0 +1,18 @@
+version: 2
+
+updates:
+  # 依存ライブラリ・ビルドの無い静的サイトなので、監視対象は GitHub Actions のみ。
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+    groups:
+      actions:
+        patterns:
+          - "*"
