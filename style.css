@@ -148,6 +148,7 @@ main {
     position: relative;
     transition: transform 0.3s;
     container-type: inline-size;
+    color: var(--card-black); /* 既定（クラス未設定時のフォールバック） */
 }
 
 .card.held {
@@ -196,7 +197,11 @@ main {
 
 .card-front {
     background-color: white;
-    color: black;
+    /* 色は .card.red / .card.black から継承する（ここで色を固定すると
+       ハート/ダイヤも黒く表示されてしまう） */
+    color: inherit;
+    /* 環境によって ♥♦ が絵文字フォントで描かれ色指定が効かなくなるのを防ぐ */
+    font-variant-emoji: text;
     transform: rotateY(180deg);
     flex-direction: column;
     line-height: 1;
